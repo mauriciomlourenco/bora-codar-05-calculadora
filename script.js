@@ -19,9 +19,9 @@ function addToDisplay(valor) {
         }
         else { 
 
-            if((valor === '+' || valor === '-' || valor === 'x' || valor === '/') && currentOperator === ''){
+            if((valor === '+' || valor === '-' || valor === 'x' || valor === '/') && currentOperator === '' && valor !== '='){
                 currentOperator = valor;
-            } else if(a !== '' && currentOperator !== '' && b !== ''){
+            } else if(a !== '' && currentOperator !== '' && b !== '' && valor !== '='){
                 result = calculate(a, b, currentOperator).toString().replace('.', ',');
               
                 lastResult = a + currentOperator + b;
@@ -78,7 +78,9 @@ function addToDisplay(valor) {
 
                 a = result.toString().replace('.', ',');
                 b= '';
-                currentOperator='';             
+                currentOperator='';
+                result = '0';
+                //lastResult = '';             
             }
 
             
@@ -89,15 +91,16 @@ function addToDisplay(valor) {
         if(result === '0' && lastResult !== ''){
             a = valor;
             lastResult = result;
-            result = ''
+            result = '';
+            lastResult = '';
             displayPreviousResult.textContent = lastResult;
-
-        } else if(currentOperator === '' && a !== '0'){
+        } else if(currentOperator === '' && a !== '0' && lastResult === '') {
             a += valor;
-        } else if(a !== '' && a === '0' && currentOperator === ''){
+        } else if(a !== '' && a === '0' && currentOperator === '' ){
             a = valor;
         }
-        else if( a !== '' && currentOperator !== ''){
+        
+        if( a !== '' && currentOperator !== ''){
             b += valor;
         }        
     }
@@ -155,6 +158,7 @@ function clearAll(){
     currentOperator='';
     b= '';
     result='0';
+    lastResult='';
     displayPreviousResult.textContent = '';
     displayResult.textContent = result;
 
