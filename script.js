@@ -82,7 +82,7 @@ function addToDisplay(valor) {
 
         } else if(currentOperator === '' && a !== '0'){
             a += valor;
-        } else if(a=== '0'){
+        } else if(a === '' && a === '0'){
             a = valor;
         }
         else {
@@ -139,10 +139,11 @@ function clearLastDigit(){
 }
 
 function clearAll(){
-    a = '0';
+    a = '';
     currentOperator='';
     b= '';
+    result='0';
     displayPreviousResult.textContent = '';
-    displayResult.textContent = a;
+    displayResult.textContent = result;
 
 }
