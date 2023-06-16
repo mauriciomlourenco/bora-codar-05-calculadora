@@ -16,52 +16,53 @@
 <body>
     <div id="calculator">
         <div id="display">
-            <div id="last-calc">1 + 1</div>
+            <div id="last-calc"></div>
                 <div id="result">
                     <img src="./assets/equals.svg" alt="sinal de igual">
-                    <span>2</span>
+                    <span id="display-result">0</span>
                 </div>           
         </div>
         <div id="keyboard">
-            <button class="secondary">CE</button>
-            <button>C</button>
-            <button>
+            <button class="secondary" onclick="clearAll()" >CE</button>
+            <button onclick="clearLastDigit()">C</button>
+            <button onclick="addToDisplay('%')">
                 <img src="./assets/percent.svg" alt="símbolo de porcentagem">
             </button>
-            <button class="tertiary">
+            <button class="tertiary" onclick="addToDisplay('/')">
                 <img src="./assets/divide.svg" alt="símbolo de divisão">
             </button>
 
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
-            <button class="tertiary">
+            <button onclick="addToDisplay('7')">7</button>
+            <button onclick="addToDisplay('8')">8</button>
+            <button onclick="addToDisplay('9')">9</button>
+            <button class="tertiary" onclick="addToDisplay('*')">
                 <img src="./assets/mult.svg" alt="símbolo de multiplicação">
             </button>
 
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
-            <button class="tertiary">
+            <button onclick="addToDisplay('4')">4</button>
+            <button onclick="addToDisplay('5')">5</button>
+            <button onclick="addToDisplay('6')">6</button>
+            <button class="tertiary" onclick="addToDisplay('-')">
                 <img src="./assets/minus.svg" alt="símbolo de subtração">
             </button>
 
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button class="tertiary">
+            <button onclick="addToDisplay('1')">1</button>
+            <button onclick="addToDisplay('2')">2</button>
+            <button onclick="addToDisplay('3')">3</button>
+            <button class="tertiary" onclick="addToDisplay('+')">
                 <img src="./assets/plus.svg" alt="símbolo de adição">
             </button>
 
-            <button class="secondary">
+            <button class="secondary" onclick="addToDisplay('+/-')">
                 <img src="./assets/plusMinus.svg" alt="símbolo de troca de sinal, mais ou menos">
             </button>
-            <button>0</button>
-            <button>,</button>
-            <button class="quartiary">
+            <button onclick="addToDisplay('0')">0</button>
+            <button onclick="addToDisplay(',')">,</button>
+            <button class="quartiary" onclick="addToDisplay('=')">
                 <img src="./assets/equalsButton.svg" alt="símbolo de igual, resultado operação">
             </button>
         </div>
+        <script src="script.js"></script>
         
     </div>   
 </body>
