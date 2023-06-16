@@ -19,7 +19,7 @@ function addToDisplay(valor) {
         }
         else { 
 
-            if(valor === '+' || valor === '-' || valor === '*' || valor === '/'){
+            if(valor === '+' || valor === '-' || valor === 'x' || valor === '/'){
                 currentOperator = valor;
             }
 
@@ -112,7 +112,7 @@ function calculate(opA, opB, operator){
             return a + b;
         case '-':
             return a - b;
-        case '*':
+        case 'x':
             return a * b;
         case '/':
             return a / b;
