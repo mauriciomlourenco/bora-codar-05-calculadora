@@ -1,6 +1,6 @@
 let previousResult = '';
 result = '0';
-let a = '';
+let a = '0';
 let b = '';
 let currentOperator = '';
 let lastResult = '';
@@ -13,14 +13,24 @@ function addToDisplay(valor) {
 
     if(isNaN(parseFloat(valor))){       
 
-        if(a === '' && valor === '-'){
-            a = valor;
+        if(a === '0' && valor === '-'){
+            a = valor + a;
             displayResult.textContent = a;
         }
         else { 
 
-            if(valor === '+' || valor === '-' || valor === 'x' || valor === '/'){
+            if((valor === '+' || valor === '-' || valor === 'x' || valor === '/') && currentOperator === ''){
                 currentOperator = valor;
+            } else if(a !== '' && currentOperator !== '' && b !== ''){
+                result = calculate(a, b, currentOperator).toString().replace('.', ',');
+              
+                lastResult = a + currentOperator + b;
+                displayPreviousResult.textContent = lastResult.toString().replace('.', ',');
+                displayResult.textContent = result;               
+
+                a = result.toString().replace('.', ',');
+                b= '';
+                currentOperator=valor;
             }
 
             if(valor === ','){
@@ -61,20 +71,22 @@ function addToDisplay(valor) {
 
             if(valor === '='){
                 result = calculate(a, b, currentOperator).toString().replace('.', ',');
+              
                 lastResult = a + currentOperator + b;
                 displayPreviousResult.textContent = lastResult.toString().replace('.', ',');
-                displayResult.textContent = result;
+                displayResult.textContent = result;               
 
                 a = result.toString().replace('.', ',');
                 b= '';
-                currentOperator='';
+                currentOperator='';             
             }
 
             
         }
 
     } else {
-        if(result!== '' && lastResult !== ''){
+
+        if(result === '0' && lastResult !== ''){
             a = valor;
             lastResult = result;
             result = ''
@@ -82,10 +94,10 @@ function addToDisplay(valor) {
 
         } else if(currentOperator === '' && a !== '0'){
             a += valor;
-        } else if(a === '' && a === '0'){
+        } else if(a !== '' && a === '0' && currentOperator === ''){
             a = valor;
         }
-        else {
+        else if( a !== '' && currentOperator !== ''){
             b += valor;
         }        
     }
@@ -98,12 +110,12 @@ function addToDisplay(valor) {
 }
 
 function calculate(opA, opB, operator){
-    a = parseFloat(opA.replace(',', '.'));
+    a = parseFloat(opA.replace(',', '.'));    
     
     if(b.includes('%')){
         let valuePercent = parseFloat(b.split('%')[0].replace(',', '.'));
         b = a * (valuePercent/100);
-    } else {
+    } else if (b !== '') {
         b = parseFloat(opB.replace(',', '.'));
     }
 
@@ -118,7 +130,7 @@ function calculate(opA, opB, operator){
             return a / b;
         case '%':
             return a % b;
-        default:
+        default:            
             return a;
         
     }
@@ -139,7 +151,7 @@ function clearLastDigit(){
 }
 
 function clearAll(){
-    a = '';
+    a = '0';
     currentOperator='';
     b= '';
     result='0';
